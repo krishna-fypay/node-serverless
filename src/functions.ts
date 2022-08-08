@@ -13,6 +13,7 @@ const headers = {
 };
 
 const schema = yup.object().shape({
+  uuid: yup.string(),
   elements: yup
     .array()
     .of(
@@ -69,7 +70,6 @@ export const createProduct = async (event: APIGatewayProxyEvent): Promise<APIGat
 
     const product = {
       ...reqBody,
-      uuid: v4(),
     };
 
     await docClient
