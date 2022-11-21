@@ -18,33 +18,21 @@ provider:
             - "dynamodb:DeleteItem"
             - "dynamodb:Scan"
           Resource:
-            - { "Fn::GetAtt": ["ElementsTable", "Arn"] }
+            - { "Fn::GetAtt": ["TitleTable", "Arn"] }
 
 functions:
-  createProduct:
-    handler: src/functions.createProduct
+  createLink:
+    handler: src/handler.createLink
     events:
       - httpApi:
-          path: /elements
+          path: /link
           method: post
-  listProduct:
-    handler: src/functions.listProduct
+  listLink:
+    handler: src/handler.listLink
     events:
       - httpApi:
-          path: /elements
+          path: /link
           method: get
-  getProduct:
-    handler: src/functions.getProduct
-    events:
-      - httpApi:
-          path: /elements/{id}
-          method: get
-  deleteProduct:
-    handler: src/functions.deleteProduct
-    events:
-      - httpApi:
-          path: /elements/{id}
-          method: delete
 
 plugins:
   - serverless-plugin-typescript
@@ -52,16 +40,16 @@ plugins:
 
 resources:
   Resources:
-    ElementsTable:
+    TitleTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ElementsTable
+        TableName: TitleTable
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         AttributeDefinitions:
-          - AttributeName: uuid
+          - AttributeName: id
             AttributeType: S
         KeySchema:
-          - AttributeName: uuid
+          - AttributeName: id
             KeyType: HASH
