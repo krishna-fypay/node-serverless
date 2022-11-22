@@ -1,6 +1,8 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import AWS from 'aws-sdk';
 import * as yup from 'yup';
+import { v4 as uuidv4 } from 'uuid';
+
 
 const docClient = new AWS.DynamoDB.DocumentClient();
 
@@ -8,13 +10,15 @@ const tableName = "TitleTable";
 
 
 const headers = {
-  "content-type": "application/json",
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Credentials': true,
+  'content-type': 'application/json'
 };
 
 const schema = yup.object().shape({
-  id : yup.string(),
+  id: yup.string(),
   title: yup.string(),
-  url : yup.string(),
+  url: yup.string(),
 });
 
 
@@ -62,6 +66,7 @@ export const createLink = async (event: APIGatewayProxyEvent): Promise<APIGatewa
     await schema.validate(reqBody, { abortEarly: false });
 
     const product = {
+      id: uuidv4(),
       ...reqBody,
     };
 
