@@ -24,36 +24,17 @@ functions:
   createLink:
     handler: src/handler.createLink
     events:
-      - httpApi:
+      - http:
           path: /link
           method: post
-          cors: 
-            origin: '*'
-            headers:
-              - Content-Type
-              - Access-Control-Allow-Headers
-              - Access-Control-Allow-Origin
-            allowCredentials: true
+          cors: true
   listLink:
     handler: src/handler.listLink
     events:
-      - httpApi:
+      - http:
           path: /link
           method: get
-          cors:
-            origin: '*'
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Amz-User-Agent
-              - Startlower
-              - Text
-              - Access-Control-Allow-Headers
-              - Access-Control-Allow-Origin
-            allowCredentials: false
+          cors: true
 
 plugins:
   - serverless-plugin-typescript
