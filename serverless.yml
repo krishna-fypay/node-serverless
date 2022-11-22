@@ -1,4 +1,4 @@
-service: node-ts-serverless
+service: node-ts-serverless-quiz
 frameworkVersion: "2"
 
 provider:
@@ -18,7 +18,7 @@ provider:
             - "dynamodb:DeleteItem"
             - "dynamodb:Scan"
           Resource:
-            - { "Fn::GetAtt": ["QuizTable", "Arn"] }
+            - { "Fn::GetAtt": ["SampleTable", "Arn"] }
 
 functions:
   createQuiz:
@@ -42,10 +42,10 @@ plugins:
 
 resources:
   Resources:
-    QuizTable:
+    SampleTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: QuizTable
+        TableName: SampleTable
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1

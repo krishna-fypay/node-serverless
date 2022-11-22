@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const docClient = new AWS.DynamoDB.DocumentClient();
 
-const tableName = "QuizTable";
+const tableName = "SampleTable";
 
 const headers = {
   'Access-Control-Allow-Origin': '*',
@@ -21,7 +21,6 @@ const schema = yup.object().shape({
     .of(
       yup.object().shape({
         options: yup.string(),
-        correct : yup.boolean()
       }),
     )
     .required("Required"),
