@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const docClient = new AWS.DynamoDB.DocumentClient();
 
-const tableName = "SampleTable";
+const tableName = "GoogleForm";
 
 const headers = {
   'Access-Control-Allow-Origin': '*',
@@ -14,13 +14,14 @@ const headers = {
 
 const schema = yup.object().shape({
   id: yup.string(),
-  questions: yup.string(),
-  type : yup.string(),
-  answers: yup
+  questions: yup
     .array()
     .of(
       yup.object().shape({
-        options: yup.string(),
+        question: yup.string(),
+        options: yup.array().of(yup.string()),
+        type: yup.string()
+    .required("Required"),
       }),
     )
     .required("Required"),

@@ -18,7 +18,7 @@ provider:
             - "dynamodb:DeleteItem"
             - "dynamodb:Scan"
           Resource:
-            - { "Fn::GetAtt": ["SampleTable", "Arn"] }
+            - { "Fn::GetAtt": ["GoogleForm", "Arn"] }
 
 functions:
   createQuiz:
@@ -42,10 +42,10 @@ plugins:
 
 resources:
   Resources:
-    SampleTable:
+    GoogleForm:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: SampleTable
+        TableName: GoogleForm
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
