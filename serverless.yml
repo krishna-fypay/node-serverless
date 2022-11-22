@@ -18,21 +18,21 @@ provider:
             - "dynamodb:DeleteItem"
             - "dynamodb:Scan"
           Resource:
-            - { "Fn::GetAtt": ["TitleTable", "Arn"] }
+            - { "Fn::GetAtt": ["QuizTable", "Arn"] }
 
 functions:
-  createLink:
-    handler: src/handler.createLink
+  createQuiz:
+    handler: src/controller.createQuiz
     events:
       - http:
-          path: /link
+          path: /quiz
           method: post
           cors: true
-  listLink:
-    handler: src/handler.listLink
+  listQuiz:
+    handler: src/controller.listQuiz
     events:
       - http:
-          path: /link
+          path: /quiz
           method: get
           cors: true
 
@@ -42,10 +42,10 @@ plugins:
 
 resources:
   Resources:
-    TitleTable:
+    QuizTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: TitleTable
+        TableName: QuizTable
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
