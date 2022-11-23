@@ -35,6 +35,13 @@ functions:
           path: /quiz
           method: get
           cors: true
+  deleteQuiz:
+    handler: src/controller.deleteQuiz
+    events:
+      - http:
+          path: /quiz/{id}
+          method: delete
+          cors: true
 
 plugins:
   - serverless-plugin-typescript

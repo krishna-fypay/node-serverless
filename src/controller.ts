@@ -134,7 +134,7 @@ export const getQuestion = async (event: APIGatewayProxyEvent): Promise<APIGatew
     return handleError(e);
   }
 };
-export const deleteQuestion = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+export const deleteQuiz = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
     const id = event.pathParameters?.id as string;
 
